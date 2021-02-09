@@ -5,7 +5,7 @@ import { PlusOutlined, DeleteFilled } from '@ant-design/icons';
 import { useTranslation } from 'react-i18next';
 import classNames from 'classnames';
 import { MixinCommonTransition } from 'styles/mixins';
-import { ReactComponent as FileIcon } from 'assets/images/file.svg';
+// import { ReactComponent as FileIcon } from 'assets/images/file.svg';
 import { RcFile } from 'antd/lib/upload';
 import { isNil } from 'lodash';
 
@@ -120,7 +120,7 @@ const ReadFile: FC<Props> = ({ maxSize, value, reader, onRemoveFile, onChange, .
   return (
     <Container>
       <File className={classNames({ visible: hasValue })}>
-        <FileIcon />
+        {/* <FileIcon /> */}
         <span className="filename">{file?.name}</span>
         <DeleteFileBtn onClick={onDeleteClick}>
           <DeleteFilled />

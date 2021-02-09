@@ -26,6 +26,7 @@ const ForkTsCheckerWebpackPlugin = require('react-dev-utils/ForkTsCheckerWebpack
 const typescriptFormatter = require('react-dev-utils/typescriptFormatter');
 const ReactRefreshWebpackPlugin = require('@pmmmwh/react-refresh-webpack-plugin');
 const AntdDayjsWebpackPlugin = require('antd-dayjs-webpack-plugin');
+const { ESBuildPlugin } = require('esbuild-loader');
 
 const postcssNormalize = require('postcss-normalize');
 
@@ -384,35 +385,46 @@ module.exports = function (webpackEnv) {
             },
             // Process application JS with Babel.
             // The preset includes JSX, Flow, TypeScript, and some ESnext features.
-            {
-              test: /\.(js|mjs|jsx|ts|tsx)$/,
-              include: paths.appSrc,
-              loader: require.resolve('babel-loader'),
-              options: {
-                customize: require.resolve('babel-preset-react-app/webpack-overrides'),
+            // {
+            //   test: /\.(js|mjs|jsx|ts|tsx)$/,
+            //   include: paths.appSrc,
+            //   loader: require.resolve('babel-loader'),
+            //   options: {
+            //     customize: require.resolve('babel-preset-react-app/webpack-overrides'),
 
-                plugins: [
-                  [
-                    require.resolve('babel-plugin-named-asset-import'),
-                    {
-                      loaderMap: {
-                        svg: {
-                          ReactComponent: '@svgr/webpack?-svgo,+titleProp,+ref![path]',
-                        },
-                      },
-                    },
-                  ],
-                  isEnvDevelopment &&
-                    shouldUseReactRefresh &&
-                    require.resolve('react-refresh/babel'),
-                ].filter(Boolean),
-                // This is a feature of `babel-loader` for webpack (not Babel itself).
-                // It enables caching results in ./node_modules/.cache/babel-loader/
-                // directory for faster rebuilds.
-                cacheDirectory: true,
-                // See #6846 for context on why cacheCompression is disabled
-                cacheCompression: false,
-                compact: isEnvProduction,
+            //     plugins: [
+            //       [
+            //         require.resolve('babel-plugin-named-asset-import'),
+            //         {
+            //           loaderMap: {
+            //             svg: {
+            //               ReactComponent: '@svgr/webpack?-svgo,+titleProp,+ref![path]',
+            //             },
+            //           },
+            //         },
+            //       ],
+            //       isEnvDevelopment &&
+            //         shouldUseReactRefresh &&
+            //         require.resolve('react-refresh/babel'),
+            //     ].filter(Boolean),
+            //     // This is a feature of `babel-loader` for webpack (not Babel itself).
+            //     // It enables caching results in ./node_modules/.cache/babel-loader/
+            //     // directory for faster rebuilds.
+            //     cacheDirectory: true,
+            //     // See #6846 for context on why cacheCompression is disabled
+            //     cacheCompression: false,
+            //     compact: isEnvProduction,
+            //   },
+            // },
+
+            // Seems not harnes the building speed to what esbuild should do
+            {
+              test: /\.(js|jsx|ts|tsx)$/,
+              include: paths.appSrc,
+              loader: 'esbuild-loader',
+              options: {
+                loader: 'tsx',
+                target: 'es2015',
               },
             },
             // Process any JS outside of the app with Babel.
@@ -546,6 +558,7 @@ module.exports = function (webpackEnv) {
       ],
     },
     plugins: [
+      new ESBuildPlugin(),
       new AntdDayjsWebpackPlugin(),
       getHtmlPluginConfig('index'),
       // getHtmlPluginConfig('login'),
