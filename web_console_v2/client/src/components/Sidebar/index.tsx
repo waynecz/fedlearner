@@ -65,6 +65,11 @@ const SIDEBAR_MENU_ITEMS = [
     icon: Workbench,
   },
   {
+    to: '/workflow-templates',
+    label: 'menu.label_workflow_tpl',
+    icon: Workbench,
+  },
+  {
     to: '/datasets',
     label: 'menu.label_datasets',
     icon: DataServer,

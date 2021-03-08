@@ -56,7 +56,7 @@ const AddButton = Button;
 const ListContainer = styled.div`
   ${MixinCommonTransition()}
   width: calc(var(--form-width, 500px) * 2);
-  overflow: hidden;
+  max-height: 0;
 
   &[data-folded='true'] {
     opacity: 0;

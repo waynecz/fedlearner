@@ -3,8 +3,8 @@ import styled from 'styled-components';
 
 const Container = styled.div``;
 
-const TemplateCreate: FC = () => {
+const CreateTemplate: FC = () => {
   return <Container>placeholder</Container>;
 };
 
-export default TemplateCreate;
+export default CreateTemplate;

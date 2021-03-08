@@ -2,6 +2,7 @@ import { I18nMessageModule, separateLng } from 'i18n/helpers';
 
 const workflow: I18nMessageModule = {
   no_result: { zh: '暂无工作流' },
+  no_tpl: { zh: '暂无工作流模板' },
   execution_detail: { zh: '工作流详情' },
   name: { zh: '工作流名称' },
   our_config: { zh: '我方配置' },

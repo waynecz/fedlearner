@@ -25,3 +25,5 @@ jobs:
         with:
           node-version: '12.x'
       - run: pwd && npm ci && npx jest --coverage
+      # Verify if can successfully build package
+      - run: npm run build

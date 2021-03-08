@@ -84,8 +84,8 @@ const WorkflowsCreateStepOne: FC<WorkflowCreateProps & { onSuccess?: any }> = ({
   const allowedIsLeftValue = isInitiate ? 'ALL' : !peerWorkflowQuery.data?.config?.is_left;
 
   const tplListQuery = useQuery(
-    ['getTemplateList', allowedIsLeftValue, groupAlias],
-    async () =>
+    ['fetchTemplateList', allowedIsLeftValue, groupAlias],
+    () =>
       fetchWorkflowTemplateList({
         isLeft: allowedIsLeftValue === 'ALL' ? undefined : allowedIsLeftValue,
         groupAlias,
