@@ -5,6 +5,8 @@ import Workflows from 'views/Workflows';
 import Datasets from 'views/Datasets';
 import { FedRouteConfig } from 'typings/app';
 
+import Editor from 'components/Editor';
+
 const routes: FedRouteConfig[] = [
   {
     path: '/',
@@ -25,6 +27,11 @@ const routes: FedRouteConfig[] = [
   {
     path: '/datasets',
     component: Datasets,
+    auth: true,
+  },
+  {
+    path: '/editor-test',
+    component: Editor,
     auth: true,
   },
 ];
